@@ -1,4 +1,4 @@
-package publisher;
+package com.example.week9.publisher;
 
 import com.example.week9.listeners.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

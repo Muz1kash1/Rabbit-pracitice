@@ -1,15 +1,16 @@
-asyncapi: '2.4.0'
+asyncapi: '2.0.0'
 info:
   title: MarksPublisher
-  version: '1.0.0'
+  version: "v1.r1."
   description: |
     Publisher for marks on virtual school
 
 servers:
-  test:
-    url: test.myrabbitcluster.org:5672
+  development:
+    url: localhost:5672
     protocol: AMQP
-    description: Test broker
+    description: Rabbit broker
+    protocolVersion: "1.0"
 
 
 defaultContentType: application/json
@@ -17,46 +18,32 @@ defaultContentType: application/json
 channels:
   federal-subscribe:
     subscribe:
-      operationId: subscribefed
+      description: federal portal subcscribe
+      operationId: subscribeFed
       message:
         $ref: '#/components/messages/markChanges'
 
   telegram-subscribe:
     subscribe:
-      operationId: subscribetel
+      description: telegram subscribe
+      operationId: subscribeTel
       message:
         $ref: '#/components/messages/markChanges'
 
 components:
+
   messages:
     markChanges:
-      name: Mark change
-      title: mark change
-      summary: something happened with mark in vs system.
-      contentType: application/json
-      payload:
-        $ref: "#/components/schemas/markChanges"
-
-
-  schemas:
-    markChanges:
-      type: object
-      properties:
-        typeOfEvent:
-          type: string
-          description: type of event happened.
-        Fullname:
-          type: string
-          description: Full name of student
-        Id:
-          type: integer
-          description: Id of student
-        nameOfSubject:
-          type: string
-          description: name of subject
-        SubjectId:
-          type: integer
-          description: id of subject
-        Rate:
-          type: integer
-          description: rate for event
+      schemaFormat: application/vnd.apache.avro+json;version=1.9.0
+      examples:
+        -"payload" :
+          {
+            "typeOfEvent": "mark",
+            "fullName": "Шевченко Денис Николаевич",
+            "id": 1,
+            "nameOfSubject": "Математика",
+            "SubjectId": 1,
+            "rate": 5
+          }
+        payload:
+          $ref: 'message.avsc'

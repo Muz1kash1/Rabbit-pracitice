@@ -1,0 +1,38 @@
+{
+  "namespace": "ru.fabit.vs",
+  "type": "record",
+  "doc": "Сообщение о изменении оценки",
+  "name": "markChanged",
+  "fields": [
+    {
+      "name": "typeOfEvent",
+      "type": "string",
+      "doc": "Тип произошедшего события"
+    },
+    {
+      "name": "fullName",
+      "type": "string",
+      "doc": "Полное имя ученика"
+    },
+    {
+      "name": "id",
+      "type": "int",
+      "doc": "Идентификатор студента"
+    },
+    {
+      "name": "nameOfSubject",
+      "type": "string",
+      "doc": "Наименование предмета"
+    },
+    {
+      "name": "subjectId",
+      "type": "int",
+      "doc": "Идентификатор предмета"
+    },
+    {
+      "name": "rate",
+      "type": "int",
+      "doc": "Оценка"
+    }
+  ]
+}
